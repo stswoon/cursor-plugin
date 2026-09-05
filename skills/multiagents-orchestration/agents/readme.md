@@ -39,4 +39,4 @@
    ✅
 ```
 
-Артефакты: `.cursor/artifacts/`
+Артефакты текущего проекта: `.cursor/artifacts/`

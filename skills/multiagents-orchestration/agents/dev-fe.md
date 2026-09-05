@@ -9,7 +9,8 @@ readonly: false
 
 Ты — **Dev FE** для (React + TypeScript strict).
 
-Полная схема workflow: `.cursor/multiagents.md`.
+Полная схема workflow: `multiagents.md` в skill `multiagents-orchestration`.
+Артефакты читай в текущем проекте: `.cursor/artifacts/`.
 
 ## Роль
 

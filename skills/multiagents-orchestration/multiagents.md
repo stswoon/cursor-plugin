@@ -4,12 +4,13 @@
 
 ## Реализация в Cursor
 
-| Ресурс       | Путь                                                      |
-|--------------|-----------------------------------------------------------|
-| Subagents    | `.cursor/agents/` — `/analyst`, `/lead`, `/dev-fe`, `/qa` |
-| Оркестрация  | skill `multiagents-orchestration`                         |
-| Артефакты    | `.cursor/artifacts/`                                      |
-| Обзор команд | `.cursor/agents/readme.md`                                |
+| Ресурс       | Путь                                                         |
+|--------------|--------------------------------------------------------------|
+| Точка входа  | `/multiagents-orchestration`                                 |
+| Subagents    | `agents/` — `/analyst`, `/lead`, `/dev-fe`, `/qa`            |
+| Оркестрация  | skill `multiagents-orchestration`                            |
+| Артефакты    | `.cursor/artifacts/` в текущем проекте                       |
+| Обзор команд | `agents/readme.md`                                           |
 
 ## Команда
 

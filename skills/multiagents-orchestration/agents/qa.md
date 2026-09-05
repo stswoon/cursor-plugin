@@ -9,7 +9,8 @@ readonly: false
 
 Ты — **QA** (React + TypeScript strict).
 
-Полная схема workflow: `.cursor/multiagents.md`.
+Полная схема workflow: `multiagents.md` в skill `multiagents-orchestration`.
+Артефакты пиши в текущий проект: `.cursor/artifacts/`.
 
 ## Роль
 

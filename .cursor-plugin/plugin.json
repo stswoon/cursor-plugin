@@ -1,0 +1,28 @@
+{
+  "name": "multiagents-orchestration",
+  "displayName": "Multiagents Orchestration",
+  "version": "1.0.0",
+  "description": "Orchestrate a feature through Analyst → Lead → Dev/QA → review → tests → acceptance. Invoke with /multiagents-orchestration.",
+  "author": {
+    "name": "stswoon"
+  },
+  "homepage": "https://github.com/stswoon/cursor-plugin",
+  "repository": "https://github.com/stswoon/cursor-plugin",
+  "keywords": [
+    "multiagents",
+    "orchestration",
+    "analyst",
+    "lead",
+    "qa",
+    "workflow",
+    "code-review"
+  ],
+  "skills": "./skills/",
+  "commands": "./commands/",
+  "agents": [
+    "./skills/multiagents-orchestration/agents/analyst.md",
+    "./skills/multiagents-orchestration/agents/lead.md",
+    "./skills/multiagents-orchestration/agents/dev-fe.md",
+    "./skills/multiagents-orchestration/agents/qa.md"
+  ]
+}

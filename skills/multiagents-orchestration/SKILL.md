@@ -2,13 +2,17 @@
 name: multiagents-orchestration
 description: >-
   Оркестрация фичи через команду SA → Lead → Dev/QA → ревью → тесты → приёмка.
-  Use when the user gives a feature task, mentions multiagents, /multiagents,
-  or asks to run the analyst-lead-dev-qa workflow.
+  Use when the user gives a feature task, mentions multiagents,
+  /multiagents-orchestration, /multiagents, or asks to run the
+  analyst-lead-dev-qa workflow.
 ---
 
 # Multiagents Orchestration
 
-Схема: `.cursor/multiagents.md`. Subagents: `.cursor/agents/`.
+Схема процесса: `multiagents.md` (рядом с этим файлом). Роли: `agents/`.
+Артефакты текущего проекта: `.cursor/artifacts/`.
+
+Точка входа для пользователя: `/multiagents-orchestration`.
 
 ## Процесс
 
@@ -28,7 +32,7 @@ description: >-
 | `/dev-fe`  | `dev-fe.md`  | 4б, доработки | no             |
 | `/qa`      | `qa.md`      | 4а, 6         | no (артефакты) |
 
-Артефакты: `.cursor/artifacts/` (`design.md`, `dev-tasks.md`, `test-cases.md`, …).
+Артефакты проекта: `.cursor/artifacts/` (`design.md`, `dev-tasks.md`, `test-cases.md`, …).
 
 ## Пошаговый workflow
 
