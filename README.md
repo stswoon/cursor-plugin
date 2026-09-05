@@ -11,7 +11,7 @@
 1. Открой **Customize** (или **Cursor Settings → Plugins**).
 2. Добавь плагин из репозитория: `https://github.com/stswoon/cursor-plugin`
 3. Выбери scope: **user** (все проекты) или **project** (только текущий).
-4. Перезагрузи окно: Command Palette → **Developer: Reload Window**.
+4. Перезагрузи окно: Command Palette (`Ctrl+Shift+A`) → **Developer: Reload Window**.
 5. В чате набери `/` и проверь, что есть `/multiagents-orchestration`.
 
 ### Локально (разработка или приватная копия)
