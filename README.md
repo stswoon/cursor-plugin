@@ -8,11 +8,15 @@
 
 ### Из Git-репозитория
 
-1. Открой **Customize** (или **Cursor Settings → Plugins**).
-2. Добавь плагин из репозитория: `https://github.com/stswoon/cursor-plugin`
-3. Выбери scope: **user** (все проекты) или **project** (только текущий).
-4. Перезагрузи окно: Command Palette (`Ctrl+Shift+A`) → **Developer: Reload Window**.
-5. В чате набери `/` и проверь, что есть `/multiagents-orchestration`.
+Импорт по GitHub-ссылке — это marketplace, не «просто папка с `plugin.json`».
+В корне репозитория должен быть `.cursor-plugin/marketplace.json` (список плагинов) и `.cursor-plugin/plugin.json`.
+
+1. Запушь актуальный `main` на GitHub (без `marketplace.json` Cursor перезагрузится и плагин не появится).
+2. Открой **Customize** (или **Cursor Settings → Plugins**).
+3. Если этот репозиторий уже добавляли раньше — удали старый marketplace/плагин, иначе Cursor может остаться на пустом первом коммите.
+4. Добавь плагин из репозитория: `https://github.com/stswoon/cursor-plugin`
+5. Выбери scope: **user** (все проекты) или **project** (только текущий).
+6. После reload в Customize должен быть **Multiagents Orchestration**; в чате — `/multiagents-orchestration`.
 
 ### Локально (разработка или приватная копия)
 
