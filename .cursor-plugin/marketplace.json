@@ -1,15 +1,16 @@
 {
-  "name": "multiagents-orchestration-marketplace",
+  "name": "stswoon-cursor-plugins",
   "owner": {
     "name": "stswoon"
   },
   "metadata": {
-    "description": "Marketplace for the Multiagents Orchestration Cursor plugin."
+    "description": "Marketplace for the Multiagents Orchestration Cursor plugin.",
+    "version": "1.0.1"
   },
   "plugins": [
     {
       "name": "multiagents-orchestration",
-      "source": "./",
+      "source": "./plugins/multiagents-orchestration",
       "description": "Orchestrate a feature through Analyst → Lead → Dev/QA → review → tests → acceptance."
     }
   ]

@@ -1,7 +1,7 @@
 {
   "name": "multiagents-orchestration",
   "displayName": "Multiagents Orchestration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Orchestrate a feature through Analyst → Lead → Dev/QA → review → tests → acceptance. Invoke with /multiagents-orchestration.",
   "author": {
     "name": "stswoon"

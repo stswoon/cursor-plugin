@@ -8,38 +8,44 @@
 
 ### Из Git-репозитория
 
-Импорт по GitHub-ссылке — это marketplace, не «просто папка с `plugin.json`».
-В корне репозитория должен быть `.cursor-plugin/marketplace.json` (список плагинов) и `.cursor-plugin/plugin.json`.
+Ссылка на GitHub добавляет **marketplace**, а не сразу ставит плагин.
+В корне репозитория — только `.cursor-plugin/marketplace.json`. Сам плагин лежит в `plugins/multiagents-orchestration/` (там `.cursor-plugin/plugin.json`, `skills/`, `commands/`).
 
-1. Запушь актуальный `main` на GitHub (без `marketplace.json` Cursor перезагрузится и плагин не появится).
-2. Открой **Customize** (или **Cursor Settings → Plugins**).
-3. Если этот репозиторий уже добавляли раньше — удали старый marketplace/плагин, иначе Cursor может остаться на пустом первом коммите.
-4. Добавь плагин из репозитория: `https://github.com/stswoon/cursor-plugin`
-5. Выбери scope: **user** (все проекты) или **project** (только текущий).
-6. После reload в Customize должен быть **Multiagents Orchestration**; в чате — `/multiagents-orchestration`.
+Reload сам по себе не подтягивает новый коммит: персональный импорт по GitHub часто остаётся на **первом** проиндексированном коммите.
+
+1. Запушь актуальный `main` на GitHub.
+2. Открой **Customize** → **Plugins**.
+3. Если `https://github.com/stswoon/cursor-plugin` уже добавляли — найди marketplace (не только плагин) и **Remove**. После reload проверь, что он не вернулся.
+4. Добавь репозиторий заново: `https://github.com/stswoon/cursor-plugin`.
+5. В каталоге marketplace должен появиться **Multiagents Orchestration**. Нажми **Install** и выбери scope: **user** или **project**. Добавить URL ≠ установить плагин.
+6. После reload в чате должна быть `/multiagents-orchestration`.
+
+Если после удаления marketplace он возвращается со старым коммитом — это [известный баг Cursor](https://forum.cursor.com/t/add-plugin-github-imports-can-get-stuck-on-stale-plugin-versions/163895). Тогда используй локальную копию ниже.
 
 ### Локально (разработка или приватная копия)
 
 1. Включи загрузку локальных плагинов, если это запрещено политикой организации (**Allow Local Plugin Imports**).
-2. Сделай junction или symlink репозитория в `~/.cursor/plugins/local/`:
+2. **Скопируй папку плагина** (не весь репозиторий) в `~/.cursor/plugins/local/` (не junction и не symlink: Cursor отклоняет ссылки наружу из этой папки).
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.cursor\plugins\local"
-New-Item -ItemType Junction -Path "$env:USERPROFILE\.cursor\plugins\local\multiagents-orchestration" -Target "D:\mycode\cursor-plugin"
+$src = "D:\mycode\cursor-plugin\plugins\multiagents-orchestration"
+$dest = "$env:USERPROFILE\.cursor\plugins\local\multiagents-orchestration"
+New-Item -ItemType Directory -Force -Path $dest | Out-Null
+robocopy $src $dest /E /NFL /NDL /NJH /NJS
 ```
 
 На macOS / Linux:
 
 ```bash
-mkdir -p ~/.cursor/plugins/local
-ln -s /path/to/cursor-plugin ~/.cursor/plugins/local/multiagents-orchestration
+rsync -a ./plugins/multiagents-orchestration/ ~/.cursor/plugins/local/multiagents-orchestration/
 ```
+
+После правок в репозитории копируй снова — локальная папка сама не обновляется.
 
 3. **Developer: Reload Window**.
 4. В **Customize** плагин должен появиться в установленных.
 
-Если команда не видна: проверь, что манифест лежит именно в корне плагина (`.cursor-plugin/plugin.json`, не на уровень
-глубже) и что включены third-party plugins.
+Если команда не видна: в корне **папки плагина** должен быть `.cursor-plugin/plugin.json`, и должны быть включены third-party plugins.
 
 ## Что входит в плагин
 
@@ -53,7 +59,7 @@ ln -s /path/to/cursor-plugin ~/.cursor/plugins/local/multiagents-orchestration
 | Agent     | `/qa`                        | Тест-кейсы и прогон                   |
 
 Подробная схема
-процесса: [skills/multiagents-orchestration/multiagents.md](skills/multiagents-orchestration/multiagents.md).
+процесса: [plugins/multiagents-orchestration/skills/multiagents-orchestration/multiagents.md](plugins/multiagents-orchestration/skills/multiagents-orchestration/multiagents.md).
 
 ## Как работать с `/multiagents-orchestration`
 
