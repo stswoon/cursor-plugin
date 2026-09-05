@@ -10,7 +10,7 @@
 | Subagents    | `agents/` — `/analyst`, `/lead`, `/dev-fe`, `/qa`            |
 | Оркестрация  | skill `multiagents-orchestration`                            |
 | Артефакты    | `.cursor/artifacts/` в текущем проекте                       |
-| Обзор команд | `agents/readme.md`                                           |
+| Обзор команд | `team.md` (рядом с этим файлом)                              |
 
 ## Команда
 

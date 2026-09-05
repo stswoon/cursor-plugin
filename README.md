@@ -6,46 +6,53 @@
 
 Репозиторий: [github.com/stswoon/cursor-plugin](https://github.com/stswoon/cursor-plugin)
 
-### Из Git-репозитория
+## Установка
 
-Ссылка на GitHub добавляет **marketplace**, а не сразу ставит плагин.
-В корне репозитория — только `.cursor-plugin/marketplace.json`. Сам плагин лежит в `plugins/multiagents-orchestration/` (там `.cursor-plugin/plugin.json`, `skills/`, `commands/`).
+Репозиторий **сам является плагином**: `.cursor-plugin/plugin.json` лежит в корне.
 
-Reload сам по себе не подтягивает новый коммит: персональный импорт по GitHub часто остаётся на **первом** проиндексированном коммите.
+### Локально
 
-1. Запушь актуальный `main` на GitHub.
-2. Открой **Customize** → **Plugins**.
-3. Если `https://github.com/stswoon/cursor-plugin` уже добавляли — найди marketplace (не только плагин) и **Remove**. После reload проверь, что он не вернулся.
-4. Добавь репозиторий заново: `https://github.com/stswoon/cursor-plugin`.
-5. В каталоге marketplace должен появиться **Multiagents Orchestration**. Нажми **Install** и выбери scope: **user** или **project**. Добавить URL ≠ установить плагин.
-6. После reload в чате должна быть `/multiagents-orchestration`.
+Единственный способ поставить плагин себе, пока он не опубликован в Marketplace.
 
-Если после удаления marketplace он возвращается со старым коммитом — это [известный баг Cursor](https://forum.cursor.com/t/add-plugin-github-imports-can-get-stuck-on-stale-plugin-versions/163895). Тогда используй локальную копию ниже.
-
-### Локально (разработка или приватная копия)
-
-1. Включи загрузку локальных плагинов, если это запрещено политикой организации (**Allow Local Plugin Imports**).
-2. **Скопируй папку плагина** (не весь репозиторий) в `~/.cursor/plugins/local/` (не junction и не symlink: Cursor отклоняет ссылки наружу из этой папки).
+1. Если действует политика организации — включи **Allow Local Plugin Imports**
+   (Dashboard → Settings → Security & Identity → Marketplace and Plugins).
+2. Скопируй репозиторий в `~/.cursor/plugins/local/multiagents-orchestration`.
 
 ```powershell
-$src = "D:\mycode\cursor-plugin\plugins\multiagents-orchestration"
+$src = "D:\mycode\cursor-plugin"
 $dest = "$env:USERPROFILE\.cursor\plugins\local\multiagents-orchestration"
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
-robocopy $src $dest /E /NFL /NDL /NJH /NJS
+robocopy $src $dest /MIR /XD .git .idea /NFL /NDL /NJH /NJS
 ```
 
-На macOS / Linux:
+На macOS / Linux можно скопировать или, как советует документация, сделать симлинк:
 
 ```bash
-rsync -a ./plugins/multiagents-orchestration/ ~/.cursor/plugins/local/multiagents-orchestration/
+rsync -a --delete --exclude .git --exclude .idea ./ ~/.cursor/plugins/local/multiagents-orchestration/
+# либо
+ln -s "$PWD" ~/.cursor/plugins/local/multiagents-orchestration
 ```
 
-После правок в репозитории копируй снова — локальная папка сама не обновляется.
+На Windows симлинк/junction не подходит — копируй. После правок в репозитории копируй снова:
+локальная папка сама не обновляется.
 
 3. **Developer: Reload Window**.
 4. В **Customize** плагин должен появиться в установленных.
 
-Если команда не видна: в корне **папки плагина** должен быть `.cursor-plugin/plugin.json`, и должны быть включены third-party plugins.
+Проверить, что Cursor его подхватил, можно в логе: **Output → Cursor Plugins**, ищи строку
+`loadUserLocalPlugin multiagents-orchestration loaded`.
+
+### Почему ссылка на GitHub не работает
+
+Вставить `https://github.com/stswoon/cursor-plugin` и получить плагин нельзя — такого флоу у Cursor нет:
+
+- Импорт GitHub-репозитория как маркетплейса — это **Dashboard → Plugins → Team Marketplaces →
+  Add Marketplace → «Import from Repo»**, и team marketplaces доступны только на планах
+  **Teams и Enterprise** ([документация](https://cursor.com/docs/plugins)).
+- Публичный Marketplace принимает плагины только через ручное ревью на `cursor.com/marketplace/publish`.
+
+Если добавить URL всё-таки не получилось, это видно в логе `Cursor Plugins`: маркетплейс не появляется
+среди источников, а в `~/.cursor/plugins/cache/` не создаётся папка под него.
 
 ## Что входит в плагин
 
@@ -58,8 +65,15 @@ rsync -a ./plugins/multiagents-orchestration/ ~/.cursor/plugins/local/multiagent
 | Agent     | `/dev-fe`                    | Имплементация по задачам Lead         |
 | Agent     | `/qa`                        | Тест-кейсы и прогон                   |
 
-Подробная схема
-процесса: [plugins/multiagents-orchestration/skills/multiagents-orchestration/multiagents.md](plugins/multiagents-orchestration/skills/multiagents-orchestration/multiagents.md).
+```
+.cursor-plugin/plugin.json          манифест
+agents/                             analyst, lead, dev-fe, qa
+commands/                           /multiagents-orchestration
+skills/multiagents-orchestration/   SKILL.md, multiagents.md, team.md
+```
+
+Подробная схема процесса:
+[skills/multiagents-orchestration/multiagents.md](skills/multiagents-orchestration/multiagents.md).
 
 ## Как работать с `/multiagents-orchestration`
 

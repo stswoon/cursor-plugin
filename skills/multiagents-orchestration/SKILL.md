@@ -9,7 +9,7 @@ description: >-
 
 # Multiagents Orchestration
 
-Схема процесса: `multiagents.md` (рядом с этим файлом). Роли: `agents/`.
+Схема процесса: `multiagents.md` (рядом с этим файлом). Роли: `agents/` в корне плагина.
 Артефакты текущего проекта: `.cursor/artifacts/`.
 
 Точка входа для пользователя: `/multiagents-orchestration`.

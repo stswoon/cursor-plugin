@@ -1,6 +1,6 @@
 # Multiagents — команда
 
-Схема процесса: [multiagents.md](../multiagents.md)  
+Схема процесса: [multiagents.md](multiagents.md)  
 Оркестрация: skill `multiagents-orchestration` (`/multiagents-orchestration`)
 
 ## Команды

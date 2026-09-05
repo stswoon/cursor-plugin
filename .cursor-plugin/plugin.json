@@ -19,10 +19,5 @@
   ],
   "skills": "./skills/",
   "commands": "./commands/",
-  "agents": [
-    "./skills/multiagents-orchestration/agents/analyst.md",
-    "./skills/multiagents-orchestration/agents/lead.md",
-    "./skills/multiagents-orchestration/agents/dev-fe.md",
-    "./skills/multiagents-orchestration/agents/qa.md"
-  ]
+  "agents": "./agents/"
 }
